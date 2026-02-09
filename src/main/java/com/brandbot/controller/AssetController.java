@@ -33,7 +33,7 @@ public class AssetController {
     @PostMapping("/generate")
     public String generateAsset(@RequestBody AssetRequest request) {
     	String image = aiService.imageCreate(request.prompt());
-    	return "image generated successfully"+image;
+    	return "image generated successfully and you can check"+image;
     } 
 }
 
