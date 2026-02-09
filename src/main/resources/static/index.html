@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BrandBot AI (No React)</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; background-color: #f4f4f9; }
+        .container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; box-sizing: border-box;}
+        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        #result { margin-top: 20px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🎨 BrandBot AI</h2>
+    <p>Describe the image you want:</p>
+    <input type="text" id="promptInput" placeholder="e.g. A cyberpunk city at night">
+    <button onclick="generateAsset()">Generate Asset</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    async function generateAsset() {
+        const prompt = document.getElementById("promptInput").value;
+        const resultDiv = document.getElementById("result");
+        
+        resultDiv.innerHTML = "⏳ Sending request to AI...";
+
+        try {
+            // This calls your Spring Boot Backend
+            const response = await fetch('http://localhost:8080/api/assets/create', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            if (response.ok) {
+                const text = await response.text();
+                resultDiv.innerHTML = "✅ " + text;
+            } else {
+                resultDiv.innerHTML = "❌ Error: " + response.status;
+            }
+        } catch (error) {
+            console.error(error);
+            resultDiv.innerHTML = "❌ Connection failed. Is Spring Boot running?";
+        }
+    }
+</script>
+
+</body>
+</html>
