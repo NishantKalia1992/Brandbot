@@ -1,21 +1,14 @@
-# Use an official OpenJDK image as the base
+# 1. Use the lightweight Java image
 FROM eclipse-temurin:17-jdk-alpine
 
-# Set the working directory inside the container
+# 2. Set working folder
 WORKDIR /app
 
-# Copy the Spring Boot JAR file into the container
+# 3. Copy only the JAR file (Do NOT copy wait-for-it.sh)
 COPY target/*.jar app.jar
 
-# Copy the wait-for-it.sh script into the container
-COPY wait-for-it.sh /wait-for-it.sh
-
-# Give execute permissions to the wait-for-it.sh script
-RUN chmod +x /wait-for-it.sh
-
-# Expose the port your Spring Boot app runs on
+# 4. Expose your port
 EXPOSE 1101
 
-# Use wait-for-it.sh to wait for MySQL to be ready, then start Spring Boot
-#CMD ["./wait-for-it.sh", "mysql:3306", "--", "java", "-jar", "app.jar"]
-CMD ["java", "-jar", "app.jar"]
+# 5. Start the app directly
+ENTRYPOINT ["java", "-jar", "app.jar"]
