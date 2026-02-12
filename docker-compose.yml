@@ -1,0 +1,20 @@
+#version: '3.8'
+#
+#services:
+#  # The Brandbot Application
+#  brandbot-app:
+#    build: .                      # Replaces: docker build -t brandbot .
+#    container_name: brandbot-container # Replaces: --name brandbot-container
+#    ports:
+#      - "1101:1101"               # Replaces: -p 1101:1101
+#    restart: always               # (Optional) Auto-restart if it crashes
+
+version: '3.8'
+
+services:
+  brandbot-app:
+    build: .
+    container_name: brandbot-container
+    ports:
+      - "1101:1101"
+    restart: always
