@@ -9,6 +9,7 @@ pipeline{
 			steps{
                 checkout scm
 			}
+		}
         stage('Build JAR'){
             steps{
 				echo 'Building the JAR file...'
@@ -32,4 +33,3 @@ pipeline{
             }
         }
     }
-}
