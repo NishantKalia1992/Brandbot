@@ -64,7 +64,7 @@ pipeline {
                     echo '--- Step 1: Login to Docker Hub ---'
                     // This line unlocks the "Safe" inside Jenkins where you stored your password.
                     // 'docker-hub-creds' MUST match the ID you typed in the Jenkins menu.
-                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', passwordVariable: 'MY_PASS', usernameVariable: 'MY_USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'd52af70c-fee1-4cc1-93ed-5682570026b9', passwordVariable: 'MY_PASS', usernameVariable: 'MY_USER')]) {
                         
                         // %MY_USER% and %MY_PASS% are placeholders. 
                         // Jenkins injects your real username (nishantkalia13) and password safely here.
